@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: zaoqiao-culture-hub
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.4
+      - key: DATABASE_PATH
+        value: /var/data/database.db
+    disk:
+      name: zaoqiao-data
+      mountPath: /var/data
+      sizeGB: 1
